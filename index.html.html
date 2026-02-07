@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Moaksha 💖</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#ff758c,#ff7eb3);
+    overflow:hidden;
+}
+.card{
+    background:rgba(255,255,255,0.95);
+    padding:50px 40px;
+    border-radius:25px;
+    text-align:center;
+    box-shadow:0 20px 60px rgba(0,0,0,0.2);
+    max-width:360px;
+    width:90%;
+    animation:fadeIn 1s ease;
+    position:relative;
+    z-index:2;
+}
+h1{color:#ff4d6d;margin-bottom:10px;}
+p{margin-bottom:20px;color:#555;}
+img{width:180px;border-radius:15px;margin-bottom:15px;}
+button{
+    padding:12px 25px;
+    margin:8px;
+    border:none;
+    border-radius:30px;
+    font-size:16px;
+    cursor:pointer;
+    transition:.3s;
+}
+#yes{
+    background:linear-gradient(45deg,#ff4d6d,#ff758c);
+    color:white;
+    box-shadow:0 8px 20px rgba(255,77,109,0.4);
+}
+#yes:hover{transform:scale(1.1);}
+#no{background:#ddd;position:relative;}
+.hidden{display:none;}
+
+.chat{
+    text-align:left;
+    background:#f2f2f2;
+    padding:15px;
+    border-radius:15px;
+}
+.bubble{
+    background:#dcf8c6;
+    padding:10px 14px;
+    border-radius:15px;
+    margin:8px 0;
+    width:fit-content;
+    max-width:80%;
+}
+
+.heart{
+    position:absolute;
+    bottom:-20px;
+    font-size:20px;
+    animation:floatUp linear infinite;
+    opacity:.7;
+}
+@keyframes floatUp{
+    to{transform:translateY(-110vh);opacity:0;}
+}
+@keyframes fadeIn{
+    from{opacity:0;transform:translateY(20px);}
+    to{opacity:1;transform:translateY(0);}
+}
+</style>
+</head>
+<body>
+
+<!-- Screen 1 -->
+<div class="card" id="screen1">
+    <img src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif">
+    <h1>Moaksha 💖</h1>
+    <p>Will you be my Valentine?</p>
+    <button id="yes" onclick="goToScreen2()">Yes ❤️</button>
+    <button id="no" onmouseover="moveButton()">No</button>
+</div>
+
+<!-- Screen 2: Celebration -->
+<div class="card hidden" id="screen2">
+    <img src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif">
+    <h1>You said YES! 💕</h1>
+    <p>You just made my heart the happiest.</p>
+    <button id="yes" onclick="goToScreen3()">Open Message 💌</button>
+</div>
+
+<!-- Screen 3: Love Letter -->
+<div class="card hidden" id="screen3">
+    <h1>For You, Moaksha ❤️</h1>
+    <p>
+        From the moment I met you, life felt a little more beautiful.<br>
+        Your smile, your voice, everything about you feels special.<br><br>
+        I just want to say… you mean a lot to me. 💖
+    </p>
+    <button id="yes" onclick="goToScreen4()">One last thing…</button>
+</div>
+
+<!-- Screen 4: Chat style -->
+<div class="card hidden" id="screen4">
+    <h1>Our Chat 💬</h1>
+    <div class="chat">
+        <div class="bubble">Hey Moaksha 😊</div>
+        <div class="bubble">I just wanted to say something...</div>
+        <div class="bubble">You make my world brighter ❤️</div>
+        <div class="bubble">And I’m really lucky to have you 💕</div>
+    </div>
+</div>
+
+<audio id="bgMusic" loop>
+<source src="https://www2.cs.uic.edu/~i101/SoundFiles/CantinaBand60.wav" type="audio/wav">
+</audio>
+
+<script>
+function goToScreen2(){
+    screen1.classList.add("hidden");
+    screen2.classList.remove("hidden");
+    document.getElementById("bgMusic").play();
+}
+function goToScreen3(){
+    screen2.classList.add("hidden");
+    screen3.classList.remove("hidden");
+}
+function goToScreen4(){
+    screen3.classList.add("hidden");
+    screen4.classList.remove("hidden");
+}
+
+function moveButton(){
+    const btn=document.getElementById("no");
+    const x=Math.random()*200-100;
+    const y=Math.random()*200-100;
+    btn.style.transform=`translate(${x}px,${y}px)`;
+}
+
+function createHearts(){
+    const heart=document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML="Moaksha ❤️";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.animationDuration=(3+Math.random()*4)+"s";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),7000);
+}
+setInterval(createHearts,700);
+</script>
+
+</body>
+</html>
